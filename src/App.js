@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import Home from "./COMPONENTS/Home";
+import React,{useState} from 'react'
+import Questions from "./COMPONENTS/Questions";
+import Results from "./COMPONENTS/Results";
+
+export const pageContext = React.createContext();
 
 function App() {
+  const [page,setPage] = useState("homepage")
+  const [score,setScore] = useState(0);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <pageContext.Provider value={{setPage: setPage,score: score,setScore: setScore}}>
+        {page === "homepage" && <Home/>}
+        {page === "questions" && <Questions/>}
+        {page === "results" && <Results/>}
+      </pageContext.Provider>
     </div>
   );
 }
